@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Олифиров, Манов & Батуев - Портфолио разработчиков</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #10b981;
+            --dark: #1f2937;
+            --darker: #111827;
+            --light: #f3f4f6;
+            --lighter: #f9fafb;
+            --gray: #9ca3af;
+            --card-bg: #ffffff;
+            --transition: all 0.3s ease;
+        }
+
+        .dark-mode {
+            --primary: #818cf8;
+            --primary-dark: #6366f1;
+            --secondary: #34d399;
+            --dark: #f3f4f6;
+            --darker: #f9fafb;
+            --light: #1f2937;
+            --lighter: #111827;
+            --gray: #6b7280;
+            --card-bg: #1f2937;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--lighter);
+            color: var(--dark);
+            transition: var(--transition);
+            line-height: 1.6;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .theme-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--card-bg);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 100;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-btn:hover {
+            transform: rotate(15deg);
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -200px;
+            right: -200px;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), transparent);
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -200px;
+            left: -200px;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, transparent, var(--secondary));
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        .hero-content {
+            text-align: center;
+            width: 100%;
+        }
+
+        .hello-h1 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeIn 1s forwards 0.5s;
+            color: var(--gray);
+            font-weight: 400;
+        }
+
+        .names-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .name-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .name-h2 {
+            font-size: 3.2rem;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            opacity: 0;
+            transform: translateY(20px);
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .name-first {
+            animation: fadeInUp 1s forwards 0.8s;
+        }
+
+        .name-second {
+            animation: fadeInUp 1s forwards 1.1s;
+        }
+
+        .name-third {
+            animation: fadeInUp 1s forwards 1.4s;
+        }
+
+        .name-separator {
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--primary);
+            margin: 0 5px;
+        }
+
+        .github-link {
+            color: var(--dark);
+            font-size: 1.5rem;
+            transition: var(--transition);
+            margin-top: 10px;
+        }
+
+        .github-link:hover {
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .title-h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeIn 1s forwards 1.7s;
+            font-weight: 500;
+            color: var(--gray);
+        }
+
+        .description-p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 50px;
+            opacity: 0;
+            animation: fadeIn 1s forwards 2s;
+            color: var(--gray);
+            line-height: 1.8;
+        }
+
+        .profiles-section {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .profile-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px;
+            width: 100%;
+            max-width: 380px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(20px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .profile-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .fade-in {
+            animation: fadeInUp 1s forwards;
+        }
+
+        .profile-card:nth-child(1) {
+            animation-delay: 2.3s;
+        }
+
+        .profile-card:nth-child(2) {
+            animation-delay: 2.6s;
+        }
+
+        .profile-card:nth-child(3) {
+            animation-delay: 2.9s;
+        }
+
+        .profile-img {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px;
+            border: 4px solid var(--primary);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-name {
+            font-size: 1.6rem;
+            margin-bottom: 8px;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .profile-role {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+            font-weight: 500;
+        }
+
+        .profile-desc {
+            font-size: 1rem;
+            color: var(--dark);
+            line-height: 1.7;
+        }
+
+        /* Секция стека технологий */
+        .stack-section {
+            padding: 80px 0;
+            background: var(--card-bg);
+            border-radius: 30px 30px 0 0;
+            margin-top: 40px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .stack-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .stack-item {
+            background: var(--lighter);
+            border-radius: 16px;
+            padding: 25px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        .stack-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .stack-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .stack-icon {
+            font-size: 2.5rem;
+            margin-right: 15px;
+            color: var(--primary);
+        }
+
+        .stack-title {
+            font-size: 1.8rem;
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        .stack-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .tech-tag {
+            background: linear-gradient(45deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 6px 15px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .cta-buttons {
+            margin-top: 40px;
+        }
+
+        .contact-expand {
+            position: relative;
+            display: inline-block;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2);
+        }
+
+        .telegram-buttons {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            margin-top: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: var(--transition);
+            z-index: 10;
+            background: var(--card-bg);
+            padding: 15px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            min-width: 220px;
+        }
+
+        .telegram-buttons.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .btn-telegram {
+            background: #0088cc;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .btn-telegram:hover {
+            background: #0077b5;
+            transform: translateX(5px);
+        }
+
+        .close-telegram {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #ef4444;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .close-telegram:hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 968px) {
+            .names-container {
+                flex-direction: column;
+            }
+
+            .name-separator {
+                margin: 10px 0;
+                transform: rotate(90deg);
+            }
+
+            .name-h2 {
+                font-size: 2.5rem;
+            }
+
+            .hello-h1 {
+                font-size: 1.6rem;
+            }
+
+            .title-h3 {
+                font-size: 1.5rem;
+            }
+
+            .description-p {
+                font-size: 1.1rem;
+            }
+
+            .profile-card {
+                max-width: 100%;
+            }
+
+            .stack-item {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .name-h2 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .stack-title {
+                font-size: 1.5rem;
+            }
+
+            .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <button class="theme-btn">🌙</button>
+
+    <div class="container">
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="hello-h1">Всем привет, мы</h1>
+
+                <div class="names-container">
+                    <!-- Первый человек -->
+                    <div class="name-wrapper">
+                        <h2 class="name-h2 name-first">Олифиров Арсений</h2>
+                        <a href="https://github.com/Arseny116" target="_blank" class="github-link">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+
+                    <div class="name-separator">  </div>   
+
+                    <!-- Второй человек -->
+                    <div class="name-wrapper">
+                        <h2 class="name-h2 name-second">Манов Никита</h2>
+                        <a href="https://github.com/nikitamanov" target="_blank" class="github-link">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+
+
+                    <!-- Третий человек -->
+                    <div class="name-wrapper">
+                        <h2 class="name-h2 name-third">Батуев Яков</h2>
+                        <a href="https://github.com/NeMoYaxa" target="_blank" class="github-link">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <h3 class="title-h3">WEB developers</h3>
+                <p class="description-p">
+                Создаем современные и адаптивные сайты, веб-приложения и пользовательские интерфейсы. Объединяем креативность и
+                техническое мастерство для реализации сложных веб-проектов.
+                </p>
+
+                <div class="profiles-section">
+                    <!-- Карточка первого человека -->
+                    <div class="profile-card fade-in">
+                        <img src="C:\Users\Константин\Desktop\promo-web-main\Арсений.jpg"
+                            alt="Олифиров Арсений" class="profile-img">
+                        <h3 class="profile-name">Арсений</h3>
+                        <p class="profile-role">Backend Developer & Team Leader</p>
+                        <p class="profile-desc"></p>
+                    </div>
+
+                    <!-- Карточка второго человека -->
+                    <div class="profile-card fade-in">
+                        <img src="C:\Users\Константин\Desktop\promo-web-main\Никита.jpg"
+                            alt="Манов Никита" class="profile-img">
+                        <h3 class="profile-name">Никита</h3>
+                        <p class="profile-role">Full-stack Developer</p>
+                        <p class="profile-desc"></p>
+                    </div>
+
+                    <!-- Карточка третьего человека -->
+                    <div class="profile-card fade-in">
+                        <img src="C:\Users\Константин\Desktop\promo-web-main\Яша.jpg"
+                            alt="Батуев Яков" class="profile-img">
+                        <h3 class="profile-name">Яков</h3>
+                        <p class="profile-role">Full-stack Developer</p>
+                        <p class="profile-desc"></p>
+                    </div>
+                </div>
+
+                <!-- Секция стека технологий -->
+                <div class="stack-section">
+                    <h2 class="section-title">Наш стек технологий</h2>
+                    <div class="stack-container">
+                        <div class="stack-item">
+                            <div class="stack-header">
+                                <i class="fab fa-react stack-icon"></i>
+                                <h3 class="stack-title">Фронтенд</h3>
+                            </div>
+                            <p>Современные технологии для создания интерактивных пользовательских интерфейсов</p>
+                            <div class="stack-tech">
+                                <span class="tech-tag">React</span>
+                                <span class="tech-tag">Redux</span>
+                                <span class="tech-tag">Vue.js</span>
+                                <span class="tech-tag">Webpack</span>
+                            </div>
+                        </div>
+
+                        <div class="stack-item">
+                            <div class="stack-header">
+                                <i class="fas fa-server stack-icon"></i>
+                                <h3 class="stack-title">Бекенд</h3>
+                            </div>
+                            <p>Мощные серверные технологии для построения производительных API и систем</p>
+                            <div class="stack-tech">
+                                <span class="tech-tag">C# ASP.Net Core</span>
+                                <span class="tech-tag">PostgreSQL</span>
+                                <span class="tech-tag">Docker</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cta-buttons">
+                    <div class="contact-expand">
+                        <button id="contact-btn" class="btn btn-outline">
+                            <i class="fas fa-paper-plane"></i> Связаться с нами
+                        </button>
+                        <div class="telegram-buttons">
+                            <button class="close-telegram">×</button>
+                            <a href="https://t.me/senyaolifirov" target="_blank" class="btn btn-telegram">
+                                <i class="fab fa-telegram"></i> @senyaolifirov
+                            </a>
+                            <a href="https://t.me/nikita" target="_blank" class="btn btn-telegram">
+                                <i class="fab fa-telegram"></i> @nikita_manov
+                            </a>
+                            <a href="https://t.me/yakov" target="_blank" class="btn btn-telegram">
+                                <i class="fab fa-telegram"></i> @yakov_batuiev
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Переключение темы
+        const themeBtn = document.querySelector('.theme-btn');
+        themeBtn.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            themeBtn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+
+            // Сохраняем предпочтение темы в localStorage
+            localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+        });
+
+        // Проверяем сохраненную тему при загрузке
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+            themeBtn.textContent = '☀️';
+        }
+
+        // Кнопка связи
+        const contactBtn = document.getElementById('contact-btn');
+        const telegramButtons = document.querySelector('.telegram-buttons');
+        const closeTelegram = document.querySelector('.close-telegram');
+
+        contactBtn.addEventListener('click', () => {
+            telegramButtons.classList.toggle('active');
+        });
+
+        closeTelegram.addEventListener('click', () => {
+            telegramButtons.classList.remove('active');
+        });
+
+        // Закрытие telegram-кнопок при клике вне области
+        document.addEventListener('click', (e) => {
+            if (!contactBtn.contains(e.target) && !telegramButtons.contains(e.target)) {
+                telegramButtons.classList.remove('active');
+            }
+        });
+
+        // Плавная прокрутка для якорей
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
